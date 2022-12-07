@@ -53,20 +53,21 @@ uint32_t CRC32(const uint8_t data[], size_t data_length);
 
 int main(void){
 
-    size_t size=32;
+    size_t size=16;
     for (int i=0;i<100;i++){
         char uuid[32];
         uint8_t *buf = gen_uuid(uuid);
         uint32_t control=CRC32(uuid, size);
 
         printf("uuid = %08d-", i+1);
-        int counter=0;
-        for(int k=0;k<32;k++){
-            printf("%x",buf[k]);
-            if(counter%4==0 && counter>7 && counter<24){
+     
+        for(int k=0;k<16;k++){
+            
+            if(k%2==0 && k>2 && k<12){
                 printf("-");
             }
-             counter++;
+			printf("%x",buf[k]);
+          
         }
         printf(" %x\n",control);
     }
@@ -76,16 +77,17 @@ int main(void){
 
 
 uint8_t * gen_uuid(uint8_t *buf) {
-    uint8_t v[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0xa, 0xb, 0xb, 0xc,0xd, 0xe};
 
-    for(int i =0; i < 32; ++i) {
-        buf[i] = v[rand()%16];
+   
+    for(int i =0; i < 16; ++i) {
+        buf[i] = rand()%255;
+
     }
     return buf;
    
 }
 
-uint32_t CRC32(const uint8_t data[], size_t data_length) {
+uint32_t CRC32(const uint8_t *data, size_t data_length) {
 	uint32_t crc32 = 0xFFFFFFFFu;
 	
 	for (size_t i = 0; i < data_length; i++) {
