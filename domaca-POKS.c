@@ -69,7 +69,7 @@ int main(void){
 			printf("%02x",buf[k]);
           
         }
-        printf(" %x\n",control);
+        printf(" %08x\n",control);
     }
     return 0;
 }
