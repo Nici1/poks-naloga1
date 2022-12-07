@@ -66,7 +66,7 @@ int main(void){
             if(k%2==0 && k>2 && k<12){
                 printf("-");
             }
-			printf("%x",buf[k]);
+			printf("%02x",buf[k]);
           
         }
         printf(" %x\n",control);
